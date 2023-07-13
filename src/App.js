@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
+import Main from "./pages/Main";
+import Product from "./pages/Product";
+import Products from "./pages/Products";
+import Layout from "./common/Layout";
+import { Login } from "./pages/Login";
+import Signup from "./pages/Signup";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Main />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<Product />} />
+        </Route>
+        <Route
+          path="*"
+          element={
+            <>
+              <div>없는 페이지입니다.</div> <Link to="/"></Link>
+            </>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
